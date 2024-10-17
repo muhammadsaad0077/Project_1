@@ -19,24 +19,24 @@ const data = {
         "order_index": 9,
         "title": "Award And Honor"
     },
-    "custom_sections": 
-        {
-            "forms": [
-                {
-                    "description": "\n<p><strong>Advances in Quantum Computing</strong>: Published in the <em>Journal of Computer Science</em>, May 2022.</p>\n<ul>\n    <li>Explored new algorithms that optimize quantum computing processes for faster computations.</li>\n    <li>Co-authored with leading researchers in the field, focusing on real-world applications of quantum algorithms.</li>\n    <li>The paper was cited by multiple research groups and influenced further studies in quantum cryptography.</li>\n</ul>\n",
-                    "order_index": 0,
-                    "title": "My Custom Section Field 1"
-                },
-                {
-                    "description": "\n<p><strong>AI-Driven Solutions in Healthcare</strong>: Featured in <em>Medical AI Review</em>, February 2023.</p>\n<ul>\n    <li>Discussed the impact of artificial intelligence on predictive diagnostics and patient care.</li>\n    <li>Highlighted the development of a machine learning model that improved diagnostic accuracy by 30%.</li>\n    <li>The publication contributed to the growing body of research on AI’s role in modern medicine.</li>\n</ul>\n",
-                    "order_index": 1,
-                    "title": "My Custom Section Field 2"
-                }
-            ],
-            "order_index": 11,
-            "title": "CustomSection"
-        },
-    
+    "custom_sections":
+    {
+        "forms": [
+            {
+                "description": "\n<p><strong>Advances in Quantum Computing</strong>: Published in the <em>Journal of Computer Science</em>, May 2022.</p>\n<ul>\n    <li>Explored new algorithms that optimize quantum computing processes for faster computations.</li>\n    <li>Co-authored with leading researchers in the field, focusing on real-world applications of quantum algorithms.</li>\n    <li>The paper was cited by multiple research groups and influenced further studies in quantum cryptography.</li>\n</ul>\n",
+                "order_index": 0,
+                "title": "My Custom Section Field 1"
+            },
+            {
+                "description": "\n<p><strong>AI-Driven Solutions in Healthcare</strong>: Featured in <em>Medical AI Review</em>, February 2023.</p>\n<ul>\n    <li>Discussed the impact of artificial intelligence on predictive diagnostics and patient care.</li>\n    <li>Highlighted the development of a machine learning model that improved diagnostic accuracy by 30%.</li>\n    <li>The publication contributed to the growing body of research on AI’s role in modern medicine.</li>\n</ul>\n",
+                "order_index": 1,
+                "title": "My Custom Section Field 2"
+            }
+        ],
+        "order_index": 12,
+        "title": "CustomSection"
+    },
+
     "education": {
         "forms": [
             {
@@ -101,7 +101,7 @@ const data = {
                 "start_date": "January 2020"
             }
         ],
-        "order_index": 1,
+        "order_index": 13,
         "title": "Activities"
     },
     "language": {
@@ -229,8 +229,8 @@ const data = {
         "order_index": 8,
         "title": "Signature"
     },
-    
-    
+
+
     "skill": {
         "forms": [
             {
@@ -275,15 +275,7 @@ const data = {
         "order_index": 4,
         "title": "Summary"
     },
-    "title": {
-        "forms": [
-            {
-                
-            }
-        ],
-        "order_index": 9,
-        "title": "Testing"
-    }
+
 
 }
 
@@ -304,9 +296,11 @@ const sectionTitles = {
     project: 'Projects',
     publication: 'Publications',
     award: 'Awards',
+    activitites: 'Activity',
     reference: 'References',
     signature: 'Signature',
-    custom_sections: 'Custom Section'
+    custom_sections: 'Custom Section',
+    
 };
 
 const personalDetails = data.personal_details.forms[0];
@@ -359,6 +353,10 @@ sortByOrderIndex(data.language.forms).forEach(language => {
     li.innerHTML = `<span class="language-name">${language.language}</span>`;
     languagesList.appendChild(li);
 });
+
+
+
+
 
 // Populating Interests Section
 const interestsList = document.querySelector('#interests-list');
@@ -431,6 +429,21 @@ sortByOrderIndex(data.award.forms).forEach(award => {
     awardsList.appendChild(div);
 });
 
+
+// Populating Activities Section
+const activitiesList = document.querySelector('#activities-list');
+activitiesList.innerHTML = ''; // Clear the default template list item
+
+// Assuming data.activity.forms is where your activities are stored
+sortByOrderIndex(data.activitites.forms).forEach(activity => {
+    const div = document.createElement('div');
+    div.classList.add('activity-item');
+    div.innerHTML = `<strong class="activity-title">${activity.activity_title}</strong><br>
+                     <p class="activity-details">${activity.details}</p>`;
+    activitiesList.appendChild(div);
+});
+
+
 // Populating References Section
 const referencesList = document.querySelector('#references-list');
 referencesList.innerHTML = ''; // Clear the default template list item
@@ -463,6 +476,10 @@ if (customSections && customSections.length > 0) {
         customSectionList.appendChild(div);
     });;
 };
+
+
+
+
 
 
 

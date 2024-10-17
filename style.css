@@ -190,17 +190,17 @@ body {
 
 .profile-container {
     position: relative;
-    width: 150px; 
-    height: 150px; 
+    width: 160.63px; 
+    height: 160.63px; 
     margin: 20px auto; /* Center the container */
 }
 
 .ring {
     position: absolute;
-    top: -16px;
+    top: -18px;
     left: -14px;
-    width: 100%;
-    height: 100%;
+    width: 159.45px;
+    height: 162.45px;
     border-radius: 50%;
     border: 10px solid rgba(255, 255, 255, 0.5); /* White with alpha for blending */
     box-shadow: 0 0 10px rgba(255, 255, 255, 0.5); /* Optional shadow effect */
@@ -224,6 +224,11 @@ body {
         margin: 0;
         padding: 0;
     }
+
+    .cv-container{
+        width: 560px;
+    }
+    
     
     .sidebar {
         background-color: var(--primary-color);
