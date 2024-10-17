@@ -124,6 +124,7 @@ body {
   font-weight: 600;
   font-style: normal;
   font-size: 42px;
+  margin-top: 60px;
 }
 
 .person-designation{
@@ -162,6 +163,15 @@ body {
 
 .align-flex{
     display: flex;
+}
+
+.about-me-section{
+    margin-top: 59px;
+}
+
+#references-list{
+    display: flex;
+    gap: 45px;
 }
 
 .contact p {

@@ -287,7 +287,6 @@ const data = {
 
 }
 
-// Assuming `data` contains the JSON information
 
 function sortByOrderIndex(arr) {
     return arr.sort((a, b) => a.order_index - b.order_index);
@@ -310,6 +309,27 @@ const sectionTitles = {
     custom_sections: 'Custom Section'
 };
 
+const personalDetails = data.personal_details.forms[0];
+const mainContent = document.getElementById("main-content");
+
+// Create and add the <h1> element for the name
+const nameHeading = document.createElement('h1');
+nameHeading.className = 'person-name'; // Add class for styling
+nameHeading.textContent = personalDetails.name; // Set the name
+
+// Create and add the <h3> element for the designation
+const designationHeading = document.createElement('h3');
+designationHeading.className = 'person-designation'; // Add class for styling
+designationHeading.textContent = personalDetails.designation; // Set the designation
+
+// Insert both headings at the top of mainContent
+mainContent.insertBefore(designationHeading, mainContent.firstChild);
+
+mainContent.insertBefore(nameHeading, mainContent.firstChild);
+
+
+
+
 // Populating section titles
 document.querySelectorAll('.section-title').forEach((titleEl, index) => {
     const sectionKey = Object.keys(sectionTitles)[index];
@@ -317,7 +337,6 @@ document.querySelectorAll('.section-title').forEach((titleEl, index) => {
 });
 
 // Populating Personal Details (Contact Section)
-const personalDetails = data.personal_details.forms[0];
 document.querySelector('.email-contact').textContent = personalDetails.email;
 document.querySelector('.phone-contact').textContent = personalDetails.phone;
 document.querySelector('.address-contact').textContent = personalDetails.address;
@@ -373,8 +392,8 @@ sortByOrderIndex(data.education.forms).forEach(edu => {
     const div = document.createElement('div');
     div.classList.add('education-item');
     div.innerHTML = `<strong class="degree-title">${edu.degree_title}</strong>, 
-        <span class="institution">${edu.institution}</span> 
-        (<span class="start-date">${edu.start_date}</span> - <span class="end-date">${edu.end_date}</span>)`;
+        <p><span class="institution">${edu.institution}</span> 
+        (<span class="start-date">${edu.start_date}</span> - <span class="end-date">${edu.end_date}</span>)</p>`;
     educationList.appendChild(div);
 });
 
@@ -443,7 +462,7 @@ if (customSections && customSections.length > 0) {
         div.innerHTML = `<strong class="custom-title">${customSection.title}</strong><br>${customSection.description}`;
         customSectionList.appendChild(div);
     });;
-}
+};
 
 
 
