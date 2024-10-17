@@ -6,19 +6,156 @@
     <title>Dynamic CV</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
+</head>
+<body>
     <div class="cv-container">
         <!-- Left Sidebar -->
         <div class="sidebar">
-            <div class="contact" id="contact-section"></div>
-            <div class="skills" id="skills-section"></div>
-            <div class="languages" id="languages-section"></div>
-            <div class="interests" id="interests-section"></div>
+            <!-- Contact Section -->
+            <div class="contact" id="contact-section">
+                <div class="profile-container">
+                    <div class="ring"></div>
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1gQJZxQiC2lKQhgQEiLW543AnJAcT2P4MzOVeuDlbgWxlKDf2lnSsL8Q65PbTxVMswPo&usqp=CAU" alt="Profile Image" class="profile-image">
+                </div>
+                <h3 class="section-title"></h3>
+                <div class="separator"></div>
+                <p><span class="material-icons">email</span> <span class="email-contact"></span></p>
+                <p><span class="material-icons">phone</span> <span class="phone-contact"></span></p>
+                <p><span class="material-icons">location_on</span> <span class="address-contact"></span></p>
+                <p><span class="material-icons">public</span> <span class="website-contact"></span></p>
+            </div>
+
+            <!-- Skills Section -->
+            <div class="skills" id="skills-section">
+                <h3 class="section-title"></h3>
+                <div class="separator"></div>
+                <ul id="skills-list">
+                    <li>
+                        <span class="skill-name"></span>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Languages Section -->
+            <div class="languages" id="languages-section">
+                <h3 class="section-title"></h3>
+                <div class="separator"></div>
+                <ul id="languages-list">
+                    <li>
+                        <span class="language-name"></span>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Interests Section -->
+            <div class="interests" id="interests-section">
+                <h3 class="section-title"></h3>
+                <div class="separator"></div>
+                <ul id="interests-list">
+                    <li>
+                        <span class="interest-description"></span>
+                    </li>
+                </ul>
+            </div>
         </div>
 
         <!-- Right Section -->
         <div class="main-content" id="main-content">
-        
+            <!-- About Me Section -->
+            <div class="section-start about-me-section">
+                <h3 class="section-title"></h3>
+                <div class="separator-black"></div>
+                <p class="about-me-text"></p>
+            </div>
+
+            <!-- Work Experience Section -->
+            <div class="section-start work-experience-section">
+                <h3 class="section-title"></h3>
+                <div class="separator-black"></div>
+                <div id="experience-list">
+                    <div class="experience-item">
+                        <strong class="position"></strong> at <span class="company-name"></span> (<span class="start-date"></span> - <span class="end-date"></span>)<br>
+                        <p class="details"></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Education Section -->
+            <div class="section-start education-section">
+                <h3 class="section-title"></h3>
+                <div class="separator-black"></div>
+                <div id="education-list">
+                    <div class="education-item">
+                        <strong class="degree-title"></strong>, <span class="institution"></span> (<span class="start-date"></span> - <span class="end-date"></span>)
+                    </div>
+                </div>
+            </div>
+
+            <!-- Projects Section -->
+            <div class="section-start projects-section">
+                <h3 class="section-title"></h3>
+                <div class="separator-black"></div>
+                <div id="projects-list">
+                    <div class="project-item">
+                        <strong class="project-title"></strong><br>
+                        <p class="project-details"></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Publications Section -->
+            <div class="section-start publications-section">
+                <h3 class="section-title"></h3>
+                <div class="separator-black"></div>
+                <div id="publications-list">
+                    <div class="publication-item">
+                        <strong class="publication-title"></strong><br>
+                        <p class="publication-description"></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Awards Section -->
+            <div class="section-start awards-section">
+                <h3 class="section-title"></h3>
+                <div class="separator-black"></div>
+                <div id="awards-list">
+                    <div class="award-item">
+                        <strong class="award-name"></strong> (<span class="award-date"></span>)<br>
+                        <p class="award-description"></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- References Section -->
+            <div class="section-start references-section">
+                <h3 class="section-title"></h3>
+                <div class="separator-black"></div>
+                <div id="references-list">
+                    <div class="reference-item">
+                        <strong class="reference-name"></strong> (<span class="company-name"></span>, <span class="position"></span>)<br>
+                        Email: <span class="email"></span><br>
+                        Phone: <span class="phone"></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Signature Section -->
+            <div class="section-start signature-section">
+                <h3 class="section-title"></h3>
+                <div class="separator-black"></div>
+                <img id="signature-image" src="" alt="Signature">
+            </div>
+            
+            <!-- Custom Section -->
+            <div id="custom-sections-container">
+                <div class="section-start" id="custom-section">
+                    <h3 class="section-title"></h3>
+                    <div class="separator-black"></div>
+                    <div id="custom-section-list"></div>
+                </div>
+            </div>
+            
         </div>
     </div>
 

@@ -287,211 +287,167 @@ const data = {
 
 }
 
+// Assuming `data` contains the JSON information
+
 function sortByOrderIndex(arr) {
     return arr.sort((a, b) => a.order_index - b.order_index);
 }
 
-const sections = [
-    { section: data.personal_details, id: 'contact-section' },
-    { section: data.skill, id: 'skills-section' },
-    { section: data.language, id: 'languages-section' },
-    { section: data.Interesets, id: 'interests-section' },
-    { section: data.summary, title: 'About Me' },
-    { section: data.experience, title: 'Work Experience' },
-    { section: data.education, title: 'Education' },
-    { section: data.project, title: 'Projects' },
-    { section: data.publication, title: 'Publications' },
-    { section: data.award, title: 'Awards' },
-    { section: data.reference, title: 'References' },
-    { section: data.signature, title: 'Signature' },
-    { section: data.custom_sections, title: 'CustomSection' }
-].sort((a, b) => a.section.order_index - b.section.order_index);
+// Section titles
+const sectionTitles = {
+    contact: 'Contact',
+    skills: 'Skills',
+    languages: 'Languages',
+    interests: 'Interests',
+    summary: 'About Me',
+    experience: 'Work Experience',
+    education: 'Education',
+    project: 'Projects',
+    publication: 'Publications',
+    award: 'Awards',
+    reference: 'References',
+    signature: 'Signature',
+    custom_sections: 'Custom Section'
+};
 
-// Populating Personal Details
-const personalDetails = data.personal_details.forms[0];
-const mainContent = document.getElementById("main-content");
-
-const nameHeading = document.createElement('h1');
-nameHeading.className = 'person-name'; // Add class for styling
-nameHeading.textContent = personalDetails.name; // Set the name
-
-// Create and add the <h3> element for the designation
-const designationHeading = document.createElement('h3');
-designationHeading.className = 'person-designation'; // Add class for styling
-designationHeading.textContent = personalDetails.designation; // Set the designation
-
-// Append both headings to mainContent
-mainContent.appendChild(nameHeading);
-mainContent.appendChild(designationHeading);
-
-// Populating sections
-sections.forEach(({ section, id, title }) => {
-
-    if (!section.forms || section.forms.length === 0 || section.forms.every(obj => Object.keys(obj).length === 0)) {
-        // If the section has no data or all objects are empty, skip this section
-        return;
-    }
-
-    // If the section belongs to the sidebar (contact, skills, languages, etc.)
-    if (id) {
-        const container = document.getElementById(id);
-
-        if (id === "contact-section") {
-            container.innerHTML = `
-                <div class="profile-container">
-                    <div class="ring"></div>
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1gQJZxQiC2lKQhgQEiLW543AnJAcT2P4MzOVeuDlbgWxlKDf2lnSsL8Q65PbTxVMswPo&usqp=CAU" alt="Profile Image" class="profile-image" />
-                </div>
-                <h3>Contact</h3>
-                <div class="separator"></div>
-                <p><span class="material-icons">email</span> <span class="email-contact">${section.forms[0].email}</span></p>
-                <p><span class="material-icons">phone</span> ${section.forms[0].phone}</p>
-                <p><span class="material-icons">location_on</span> ${section.forms[0].address}</p>
-                <p><span class="material-icons">public</span> <a href="${section.forms[0].website}" target="_blank">${section.forms[0].website}</a></p>`;
-        } else if (id === "skills-section") {
-            container.innerHTML = `<h3>Skills</h3><div class="separator"></div><ul id="skills-list"></ul>`;
-            const skillsList = document.getElementById("skills-list");
-            sortByOrderIndex(section.forms).forEach(skill => {
-                const li = document.createElement("li");
-                li.textContent = skill.skill;
-                skillsList.appendChild(li);
-            });
-        } else if (id === "languages-section") {
-            container.innerHTML = `<h3>Languages</h3><div class="separator"></div><ul id="languages-list"></ul>`;
-            const languagesList = document.getElementById("languages-list");
-            sortByOrderIndex(section.forms).forEach(language => {
-                const li = document.createElement("li");
-                li.textContent = language.language;
-                languagesList.appendChild(li);
-            });
-        } else if (id === "interests-section") {
-            container.innerHTML = `<h3>Interests</h3><div class="separator"></div><ul id="interests-list"></ul>`;
-            const interestsList = document.getElementById("interests-list");
-            section.forms.forEach(interest => {
-                const li = document.createElement("li");
-                li.innerHTML = interest.description;
-                interestsList.appendChild(li);
-            });
-        }
-    } else {
-        // For sections in the main content
-
-        const sectionDiv = document.createElement('div');
-        sectionDiv.className = "section-start";
-        sectionDiv.classList.add(title.toLowerCase().replace(" ", "-"));
-        sectionDiv.innerHTML = `<h3 class="right-heading">${title}</h3><div class="separator-black"></div>`;
-
-        if (title === "About Me") {
-            sectionDiv.innerHTML += `<p>${section.forms[0].summary}</p>`;
-        } else if (title === "Work Experience") {
-            section.forms.forEach(exp => {
-                const div = document.createElement("div");
-                div.innerHTML = `<strong>${exp.position}</strong> at ${exp.company_name} (${exp.start_date} - ${exp.end_date})<br><p>${exp.details}</p>`;
-                sectionDiv.appendChild(div);
-            });
-        } else if (title === "CustomSection") {
-            sortByOrderIndex(section.forms).forEach(customSection => {
-                const div = document.createElement("div");
-                div.innerHTML = `<strong>${customSection.title}</strong><br><p>${customSection.description}</p>`;
-                sectionDiv.appendChild(div);
-            });
-        }
-        
-        else if (title === "Education") {
-            section.forms.forEach(edu => {
-                const div = document.createElement("div");
-                div.innerHTML = `<strong>${edu.degree_title}</strong>, ${edu.institution} (${edu.start_date} - ${edu.end_date})`;
-                sectionDiv.appendChild(div);
-            });
-        } else if (title === "Projects") {
-            section.forms.forEach(project => {
-                const div = document.createElement("div");
-                div.innerHTML = `<strong>${project.title}</strong><br><p>${project.details}</p>`;
-                sectionDiv.appendChild(div);
-            });
-        } else if (title === "Publications") {
-            section.forms.forEach(publication => {
-                const div = document.createElement("div");
-                div.innerHTML = `<strong>${publication.title}</strong><br><p>${publication.description}</p>`;
-                sectionDiv.appendChild(div);
-            });
-        } else if (title === "Awards") {
-            section.forms.forEach(award => {
-                const div = document.createElement("div");
-                div.innerHTML = `<strong>${award.award_name}</strong> (${award.date})<br><p>${award.description}</p>`;
-                sectionDiv.appendChild(div);
-            });
-        } else if (title === "References") {
-            section.forms.forEach(reference => {
-                const div = document.createElement("div");
-                div.innerHTML = `<strong>${reference.reference_name}</strong> (${reference.company_name}, ${reference.position})<br>Email: ${reference.email}<br>Phone: ${reference.phone}`;
-                sectionDiv.appendChild(div);
-            });
-        }  else if (title === "Signature") {
-            sectionDiv.innerHTML += `<img id="signature-image" src="${section.forms[0].signature_photo_path}" alt="Signature">`;
-        }
-
-        mainContent.appendChild(sectionDiv);
-    }
+// Populating section titles
+document.querySelectorAll('.section-title').forEach((titleEl, index) => {
+    const sectionKey = Object.keys(sectionTitles)[index];
+    titleEl.textContent = sectionTitles[sectionKey];
 });
 
-// Update personal details in the summary area
-document.getElementById("name").textContent = personalDetails.name;
-document.getElementById("job-title").textContent = personalDetails.job_title;
-document.getElementById("email").textContent = personalDetails.email;
-document.getElementById("phone").textContent = personalDetails.phone;
-document.getElementById("address").textContent = personalDetails.address;
-document.getElementById("website").textContent = personalDetails.website;
+// Populating Personal Details (Contact Section)
+const personalDetails = data.personal_details.forms[0];
+document.querySelector('.email-contact').textContent = personalDetails.email;
+document.querySelector('.phone-contact').textContent = personalDetails.phone;
+document.querySelector('.address-contact').textContent = personalDetails.address;
+document.querySelector('.website-contact').textContent = personalDetails.website;
 
-// Populating Skills
-const skillsList = document.getElementById("skills-list");
+// Populating Skills Section
+const skillsList = document.querySelector('#skills-list');
+skillsList.innerHTML = ''; // Clear the default template list item
 sortByOrderIndex(data.skill.forms).forEach(skill => {
-    const li = document.createElement("li");
-    li.textContent = skill.skill;
+    const li = document.createElement('li');
+    li.innerHTML = `<span class="skill-name">${skill.skill}</span>`;
     skillsList.appendChild(li);
 });
 
-// Populating Languages
-const languagesList = document.getElementById("languages-list");
+// Populating Languages Section
+const languagesList = document.querySelector('#languages-list');
+languagesList.innerHTML = ''; // Clear the default template list item
 sortByOrderIndex(data.language.forms).forEach(language => {
-    const li = document.createElement("li");
-    li.textContent = language.language;
+    const li = document.createElement('li');
+    li.innerHTML = `<span class="language-name">${language.language}</span>`;
     languagesList.appendChild(li);
 });
 
-// Populating Experience
-const experienceList = document.getElementById("experience-list");
+// Populating Interests Section
+const interestsList = document.querySelector('#interests-list');
+interestsList.innerHTML = ''; // Clear the default template list item
+sortByOrderIndex(data.Interesets.forms).forEach(interest => {
+    const li = document.createElement('li');
+    li.innerHTML = `<span class="interest-description">${interest.description}</span>`;
+    interestsList.appendChild(li);
+});
+
+// Populating About Me (Summary)
+const aboutMeText = document.querySelector('.about-me-text');
+aboutMeText.textContent = data.summary.forms[0].summary;
+
+// Populating Work Experience Section
+const experienceList = document.querySelector('#experience-list');
+experienceList.innerHTML = ''; // Clear the default template list item
 sortByOrderIndex(data.experience.forms).forEach(exp => {
-    const div = document.createElement("div");
-    div.innerHTML = `<strong>${exp.position}</strong> at ${exp.company_name} (${exp.start_date} - ${exp.end_date})<br><p>${exp.details}</p>`;
+    const div = document.createElement('div');
+    div.classList.add('experience-item');
+    div.innerHTML = `<strong class="position">${exp.position}</strong> at <span class="company-name">${exp.company_name}</span> 
+        (<span class="start-date">${exp.start_date}</span> - <span class="end-date">${exp.end_date}</span>)<br>
+        <p class="details">${exp.details}</p>`;
     experienceList.appendChild(div);
 });
 
-// Populating Education
-const educationList = document.getElementById("education-list");
+// Populating Education Section
+const educationList = document.querySelector('#education-list');
+educationList.innerHTML = ''; // Clear the default template list item
 sortByOrderIndex(data.education.forms).forEach(edu => {
-    const div = document.createElement("div");
-    div.innerHTML = `<strong>${edu.degree_title}</strong>, ${edu.institution} (${edu.start_date} - ${edu.end_date})`;
+    const div = document.createElement('div');
+    div.classList.add('education-item');
+    div.innerHTML = `<strong class="degree-title">${edu.degree_title}</strong>, 
+        <span class="institution">${edu.institution}</span> 
+        (<span class="start-date">${edu.start_date}</span> - <span class="end-date">${edu.end_date}</span>)`;
     educationList.appendChild(div);
 });
 
-// Populating Awards
-const awardsList = document.getElementById("awards-list");
+// Populating Projects Section
+const projectsList = document.querySelector('#projects-list');
+projectsList.innerHTML = ''; // Clear the default template list item
+sortByOrderIndex(data.project.forms).forEach(project => {
+    const div = document.createElement('div');
+    div.classList.add('project-item');
+    div.innerHTML = `<strong class="project-title">${project.title}</strong><br>
+        <p class="project-details">${project.details}</p>`;
+    projectsList.appendChild(div);
+});
+
+// Populating Publications Section
+const publicationsList = document.querySelector('#publications-list');
+publicationsList.innerHTML = ''; // Clear the default template list item
+sortByOrderIndex(data.publication.forms).forEach(publication => {
+    const div = document.createElement('div');
+    div.classList.add('publication-item');
+    div.innerHTML = `<strong class="publication-title">${publication.title}</strong><br>
+        <p class="publication-description">${publication.description}</p>`;
+    publicationsList.appendChild(div);
+});
+
+// Populating Awards Section
+const awardsList = document.querySelector('#awards-list');
+awardsList.innerHTML = ''; // Clear the default template list item
 sortByOrderIndex(data.award.forms).forEach(award => {
-    const div = document.createElement("div");
-    div.innerHTML = `<strong>${award.award_name}</strong>, ${award.issuing_org} (${award.date})<br>${award.description}`;
+    const div = document.createElement('div');
+    div.classList.add('award-item');
+    div.innerHTML = `<strong class="award-name">${award.award_name}</strong> 
+        (<span class="award-date">${award.date}</span>)<br>
+        <p class="award-description">${award.description}</p>`;
     awardsList.appendChild(div);
 });
 
+// Populating References Section
+const referencesList = document.querySelector('#references-list');
+referencesList.innerHTML = ''; // Clear the default template list item
+sortByOrderIndex(data.reference.forms).forEach(reference => {
+    const div = document.createElement('div');
+    div.classList.add('reference-item');
+    div.innerHTML = `<strong class="reference-name">${reference.reference_name}</strong> 
+        (<span class="company-name">${reference.company_name}</span>, 
+        <span class="position">${reference.position}</span>)<br>
+        Email: <span class="email">${reference.email}</span><br>
+        Phone: <span class="phone">${reference.phone}</span>`;
+    referencesList.appendChild(div);
+});
+
+// Populating Signature Section
+const signatureImage = document.querySelector('#signature-image');
+signatureImage.src = data.signature.forms[0].signature_photo_path;
+
+
 // Populating Custom Sections
-const customSectionList = document.getElementById("custom-section-list");
-if (data.custom_sections && data.custom_sections.length > 0) {
-    sortByOrderIndex(data.custom_sections[0].forms).forEach(section => {
+const customSectionList = document.querySelector('#custom-section-list');
+const customSections = data.custom_sections.forms;
+
+if (customSections && customSections.length > 0) {
+    // Loop through each custom section
+    customSections.forEach(customSection => {
         const div = document.createElement("div");
-        div.innerHTML = `<strong>${section.title}</strong><br>${section.description}`;
+        div.classList.add("custom-section-item");
+        div.innerHTML = `<strong class="custom-title">${customSection.title}</strong><br>${customSection.description}`;
         customSectionList.appendChild(div);
-    });
+    });;
 }
+
+
+
+
 
 
 

@@ -22,27 +22,25 @@ body {
     background-color: #f0f0f0;
 }
 
-li{
-    list-style-type: none;
-}
 
 .cv-container {
     display: flex;
-    max-width: 1000px;
     margin: auto;
     background-color: white;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 794px;
 }
 
 .sidebar {
-    background-color: var(--primary-color);
+    background-color: #323b4c;
     color: white;
     padding: var(--main-padding);
-    width: 30%;
+    width: 274px;
     display: flex;
     flex-direction: column;
     gap: var(--main-margin);
 }
+
 
 .sidebar h3 {
     font-family: var(--font-family-heading);
@@ -67,14 +65,15 @@ li{
 
 #skills-section li{
     font-size: var(--list-size);
-    margin-left: -36px;
+    margin-left: -21px;
     margin-top: 8px;
 }
 
 #languages-section li{
     font-size: var(--list-size);
-    margin-left: -36px;
+    margin-left: -21px;
     margin-top: 8px;
+    list-style-type: none;
 }
 
 #interests-section li, strong{
@@ -83,7 +82,7 @@ li{
 
 #interests-section p{
     font-size: var(--list-size);
-    margin-left: -10px;
+    margin-left: 2px;
 }
 
 #interests-section li{
@@ -91,10 +90,14 @@ li{
     margin-top: 20px;
 }
 
+.experience-section{
+    margin-top: 20px;
+}
+
 
 .main-content {
     padding: var(--main-padding);
-    width: 70%;
+    width: 520px;
 }
 
 
@@ -111,6 +114,9 @@ li{
     font-size: 10px;
 }
 
+.material-icons{
+    font-size: 20px!important;
+}
 
 .person-name{
     font-family: var(--font-family-name);

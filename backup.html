@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic CV</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <div class="cv-container">
+        <!-- Left Sidebar -->
+        <div class="sidebar">
+            <div class="contact" id="contact-section"></div>
+            <div class="skills" id="skills-section"></div>
+            <div class="languages" id="languages-section"></div>
+            <div class="interests" id="interests-section"></div>
+        </div>
+
+        <!-- Right Section -->
+        <div class="main-content" id="main-content">
+        
+        </div>
+    </div>
+
+    <script src="script.js">
+        function sortByOrderIndex(arr) {
+    return arr.sort((a, b) => a.order_index - b.order_index);
+}
+
+const sections = [
+    { section: data.personal_details, id: 'contact-section' },
+    { section: data.skill, id: 'skills-section' },
+    { section: data.language, id: 'languages-section' },
+    { section: data.Interesets, id: 'interests-section' },
+    { section: data.summary, title: 'About Me' },
+    { section: data.experience, title: 'Work Experience' },
+    { section: data.education, title: 'Education' },
+    { section: data.project, title: 'Projects' },
+    { section: data.publication, title: 'Publications' },
+    { section: data.award, title: 'Awards' },
+    { section: data.reference, title: 'References' },
+    { section: data.signature, title: 'Signature' },
+    { section: data.custom_sections, title: 'CustomSection' }
+].sort((a, b) => a.section.order_index - b.section.order_index);
+
+// Populating Personal Details
+const personalDetails = data.personal_details.forms[0];
+const mainContent = document.getElementById("main-content");
+
+const nameHeading = document.createElement('h1');
+nameHeading.className = 'person-name'; // Add class for styling
+nameHeading.textContent = personalDetails.name; // Set the name
+
+// Create and add the <h3> element for the designation
+const designationHeading = document.createElement('h3');
+designationHeading.className = 'person-designation'; // Add class for styling
+designationHeading.textContent = personalDetails.designation; // Set the designation
+
+// Append both headings to mainContent
+mainContent.appendChild(nameHeading);
+mainContent.appendChild(designationHeading);
+
+// Populating sections
+sections.forEach(({ section, id, title }) => {
+
+    if (!section.forms || section.forms.length === 0 || section.forms.every(obj => Object.keys(obj).length === 0)) {
+        // If the section has no data or all objects are empty, skip this section
+        return;
+    }
+
+    // If the section belongs to the sidebar (contact, skills, languages, etc.)
+    if (id) {
+        const container = document.getElementById(id);
+
+        if (id === "contact-section") {
+            container.innerHTML = `
+                <div class="profile-container">
+                    <div class="ring"></div>
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1gQJZxQiC2lKQhgQEiLW543AnJAcT2P4MzOVeuDlbgWxlKDf2lnSsL8Q65PbTxVMswPo&usqp=CAU" alt="Profile Image" class="profile-image" />
+                </div>
+                <h3>Contact</h3>
+                <div class="separator"></div>
+                <p><span class="material-icons">email</span> <span class="email-contact">${section.forms[0].email}</span></p>
+                <p><span class="material-icons">phone</span> ${section.forms[0].phone}</p>
+                <p><span class="material-icons">location_on</span> ${section.forms[0].address}</p>
+                <p><span class="material-icons">public</span> <a href="${section.forms[0].website}" target="_blank">${section.forms[0].website}</a></p>`;
+        } else if (id === "skills-section") {
+            container.innerHTML = `<h3>Skills</h3><div class="separator"></div><ul id="skills-list"></ul>`;
+            const skillsList = document.getElementById("skills-list");
+            sortByOrderIndex(section.forms).forEach(skill => {
+                const li = document.createElement("li");
+                li.textContent = skill.skill;
+                skillsList.appendChild(li);
+            });
+        } else if (id === "languages-section") {
+            container.innerHTML = `<h3>Languages</h3><div class="separator"></div><ul id="languages-list"></ul>`;
+            const languagesList = document.getElementById("languages-list");
+            sortByOrderIndex(section.forms).forEach(language => {
+                const li = document.createElement("li");
+                li.textContent = language.language;
+                languagesList.appendChild(li);
+            });
+        } else if (id === "interests-section") {
+            container.innerHTML = `<h3>Interests</h3><div class="separator"></div><ul id="interests-list"></ul>`;
+            const interestsList = document.getElementById("interests-list");
+            section.forms.forEach(interest => {
+                const li = document.createElement("li");
+                li.innerHTML = interest.description;
+                interestsList.appendChild(li);
+            });
+        }
+    } else {
+        // For sections in the main content
+
+        const sectionDiv = document.createElement('div');
+        sectionDiv.className = "section-start";
+        sectionDiv.classList.add(title.toLowerCase().replace(" ", "-"));
+        sectionDiv.innerHTML = `<h3 class="right-heading">${title}</h3><div class="separator-black"></div>`;
+
+        if (title === "About Me") {
+            sectionDiv.innerHTML += `<p>${section.forms[0].summary}</p>`;
+        } else if (title === "Work Experience") {
+            section.forms.forEach(exp => {
+                const div = document.createElement("div");
+                div.className = "experience-section";
+                div.innerHTML = `<strong>${exp.position}</strong> at ${exp.company_name} (${exp.start_date} - ${exp.end_date})<br><p>${exp.details}</p>`;
+                sectionDiv.appendChild(div);
+            });
+        } else if (title === "CustomSection") {
+            sortByOrderIndex(section.forms).forEach(customSection => {
+                const div = document.createElement("div");
+                div.innerHTML = `<strong>${customSection.title}</strong><br><p>${customSection.description}</p>`;
+                sectionDiv.appendChild(div);
+            });
+        }
+        
+        else if (title === "Education") {
+            section.forms.forEach(edu => {
+                const div = document.createElement("div");
+                div.innerHTML = `<strong>${edu.degree_title}</strong>, ${edu.institution} (${edu.start_date} - ${edu.end_date})`;
+                sectionDiv.appendChild(div);
+            });
+        } else if (title === "Projects") {
+            section.forms.forEach(project => {
+                const div = document.createElement("div");
+                div.innerHTML = `<strong>${project.title}</strong><br><p>${project.details}</p>`;
+                sectionDiv.appendChild(div);
+            });
+        } else if (title === "Publications") {
+            section.forms.forEach(publication => {
+                const div = document.createElement("div");
+                div.innerHTML = `<strong>${publication.title}</strong><br><p>${publication.description}</p>`;
+                sectionDiv.appendChild(div);
+            });
+        } else if (title === "Awards") {
+            section.forms.forEach(award => {
+                const div = document.createElement("div");
+                div.innerHTML = `<strong>${award.award_name}</strong> (${award.date})<br><p>${award.description}</p>`;
+                sectionDiv.appendChild(div);
+            });
+        } else if (title === "References") {
+            section.forms.forEach(reference => {
+                const div = document.createElement("div");
+                div.innerHTML = `<strong>${reference.reference_name}</strong> (${reference.company_name}, ${reference.position})<br>Email: ${reference.email}<br>Phone: ${reference.phone}`;
+                sectionDiv.appendChild(div);
+            });
+        }  else if (title === "Signature") {
+            sectionDiv.innerHTML += `<img id="signature-image" src="${section.forms[0].signature_photo_path}" alt="Signature">`;
+        }
+
+        mainContent.appendChild(sectionDiv);
+    }
+});
+
+// Update personal details in the summary area
+document.getElementById("name").textContent = personalDetails.name;
+document.getElementById("job-title").textContent = personalDetails.job_title;
+document.getElementById("email").textContent = personalDetails.email;
+document.getElementById("phone").textContent = personalDetails.phone;
+document.getElementById("address").textContent = personalDetails.address;
+document.getElementById("website").textContent = personalDetails.website;
+
+// Populating Skills
+const skillsList = document.getElementById("skills-list");
+sortByOrderIndex(data.skill.forms).forEach(skill => {
+    const li = document.createElement("li");
+    li.textContent = skill.skill;
+    skillsList.appendChild(li);
+});
+
+// Populating Languages
+const languagesList = document.getElementById("languages-list");
+sortByOrderIndex(data.language.forms).forEach(language => {
+    const li = document.createElement("li");
+    li.textContent = language.language;
+    languagesList.appendChild(li);
+});
+
+// Populating Experience
+const experienceList = document.getElementById("experience-list");
+sortByOrderIndex(data.experience.forms).forEach(exp => {
+    const div = document.createElement("div");
+    div.innerHTML = `<strong>${exp.position}</strong> at ${exp.company_name} (${exp.start_date} - ${exp.end_date})<br><p>${exp.details}</p>`;
+    experienceList.appendChild(div);
+});
+
+// Populating Education
+const educationList = document.getElementById("education-list");
+sortByOrderIndex(data.education.forms).forEach(edu => {
+    const div = document.createElement("div");
+    div.innerHTML = `<strong>${edu.degree_title}</strong>, ${edu.institution} (${edu.start_date} - ${edu.end_date})`;
+    educationList.appendChild(div);
+});
+
+// Populating Awards
+const awardsList = document.getElementById("awards-list");
+sortByOrderIndex(data.award.forms).forEach(award => {
+    const div = document.createElement("div");
+    div.innerHTML = `<strong>${award.award_name}</strong>, ${award.issuing_org} (${award.date})<br>${award.description}`;
+    awardsList.appendChild(div);
+});
+
+// Populating Custom Sections
+const customSectionList = document.getElementById("custom-section-list");
+if (data.custom_sections && data.custom_sections.length > 0) {
+    sortByOrderIndex(data.custom_sections[0].forms).forEach(section => {
+        const div = document.createElement("div");
+        div.innerHTML = `<strong>${section.title}</strong><br>${section.description}`;
+        customSectionList.appendChild(div);
+    });
+}
+
+
+
+    </script>
+</body>
+</html>
