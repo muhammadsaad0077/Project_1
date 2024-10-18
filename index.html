@@ -17,6 +17,7 @@
                     <div class="ring"></div>
                     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1gQJZxQiC2lKQhgQEiLW543AnJAcT2P4MzOVeuDlbgWxlKDf2lnSsL8Q65PbTxVMswPo&usqp=CAU" alt="Profile Image" class="profile-image">
                 </div>
+                
                 <h3 class="section-title"></h3>
                 <div class="separator"></div>
                 <p><span class="material-icons">email</span> <span class="email-contact"></span></p>
@@ -74,11 +75,21 @@
                 <div class="separator-black"></div>
                 <div id="experience-list">
                     <div class="experience-item">
-                        <strong class="position"></strong> at <span class="company-name"></span> (<span class="start-date"></span> - <span class="end-date"></span>)<br>
+                        <div class="date-range">
+                            <span class="start-date"></span> - <span class="end-date"></span>
+                        </div>
+                        <div class="company-info">
+                            <span class="company-name"></span>
+                        </div>
+                        <div class="position-info">
+                            <span class="position"></span>
+                        </div>
+                        <!-- Details -->
                         <p class="details"></p>
                     </div>
                 </div>
             </div>
+            
 
             <!-- Education Section -->
             <div class="section-start education-section">
@@ -86,11 +97,24 @@
                 <div class="separator-black"></div>
                 <div id="education-list">
                     <div class="education-item">
-                        <strong class="degree-title"></strong>
-                        <p><span class="institution"></span> (<span class="start-date"></span> - <span class="end-date"></span>)</p>
+                        <!-- First line: Start date - End date -->
+                        <div class="date-range">
+                            <span class="start-date"></span> - <span class="end-date"></span>
+                        </div>
+                        <!-- Second line: Institution -->
+                        <div class="institution-info">
+                            <span class="institution"></span>
+                        </div>
+                        <!-- Third line: Degree title -->
+                        <div class="degree-info">
+                            <span class="degree-title"></span>
+                        </div>
+                        <!-- Details -->
+                        <p class="details"></p>
                     </div>
                 </div>
             </div>
+            
 
             <!-- Projects Section -->
             <div class="section-start projects-section">
@@ -98,7 +122,7 @@
                 <div class="separator-black"></div>
                 <div id="projects-list">
                     <div class="project-item">
-                        <strong class="project-title"></strong><br>
+                        <span class="project-title"></span><br>
                         <p class="project-details"></p>
                     </div>
                 </div>
@@ -110,7 +134,7 @@
                 <div class="separator-black"></div>
                 <div id="publications-list">
                     <div class="publication-item">
-                        <strong class="publication-title"></strong><br>
+                        <span class="publication-title"></span><br>
                         <p class="publication-description"></p>
                     </div>
                 </div>
@@ -122,7 +146,7 @@
                 <div class="separator-black"></div>
                 <div id="awards-list">
                     <div class="award-item">
-                        <strong class="award-name"></strong> (<span class="award-date"></span>)<br>
+                        <span class="award-date date-range"></span><br> <span class="award-name"></span><br>
                         <p class="award-description"></p>
                     </div>
                 </div>
@@ -146,9 +170,9 @@
                 <div class="separator-black"></div>
                 <div id="references-list">
                     <div class="reference-item">
-                        <strong class="reference-name"></strong> (<span class="company-name"></span>, <span class="position"></span>)<br>
-                        Email: <span class="email"></span><br>
-                        Phone: <span class="phone"></span>
+                        <span class="reference-name"></span><br> <span class="company-name"></span>, <span class="position"></span><br>
+                        Phone: <span class="phone"></span><br>
+                        Email: <span class="email"></span>
                     </div>
                 </div>
             </div>

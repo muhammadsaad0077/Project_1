@@ -41,7 +41,7 @@ const data = {
         "forms": [
             {
                 "degree_title": "B.S. in Computer Science",
-                "details": null,
+                "details": "\n            <p><strong>Led the development</strong> of game engines for iconic titles such as <em>Doom</em> and <em>Quake</em>.</p> \n            <ul>\n                <li>Developed the <strong>Doom Engine</strong>, which revolutionized 3D gaming.</li>\n                <li>Co-created <strong>Quake</strong>, one of the first true 3D games, setting the stage for modern gaming engines.</li>\n                <li>Contributed to advancements in real-time 3D graphics and networked multiplayer gaming.</li>\n            </ul>\n            ",
                 "end_date": "January 2020",
                 "grade": "2.88",
                 "institution": "University of Missouri",
@@ -50,7 +50,7 @@ const data = {
             },
             {
                 "degree_title": "M.S. in Computer Science",
-                "details": null,
+                "details": "\n            <p><strong>Led the development</strong> of game engines for iconic titles such as <em>Doom</em> and <em>Quake</em>.</p> \n            <ul>\n                <li>Developed the <strong>Doom Engine</strong>, which revolutionized 3D gaming.</li>\n                <li>Co-created <strong>Quake</strong>, one of the first true 3D games, setting the stage for modern gaming engines.</li>\n                <li>Contributed to advancements in real-time 3D graphics and networked multiplayer gaming.</li>\n            </ul>\n            ",
                 "end_date": "January 2022",
                 "grade": "3.5",
                 "institution": "Stanford University",
@@ -200,7 +200,7 @@ const data = {
     "reference": {
         "forms": [
             {
-                "company_name": "id Software",
+                "company_name": "ID Software",
                 "email": "john.doe@idsoftware.com",
                 "order_index": 0,
                 "phone": "+1 555-1111",
@@ -377,11 +377,37 @@ experienceList.innerHTML = ''; // Clear the default template list item
 sortByOrderIndex(data.experience.forms).forEach(exp => {
     const div = document.createElement('div');
     div.classList.add('experience-item');
-    div.innerHTML = `<strong class="position">${exp.position}</strong> at <span class="company-name">${exp.company_name}</span> 
-        (<span class="start-date">${exp.start_date}</span> - <span class="end-date">${exp.end_date}</span>)<br>
-        <p class="details">${exp.details}</p>`;
+
+    // Create the date range div
+    const dateRangeDiv = document.createElement('div');
+    dateRangeDiv.classList.add('date-range');
+    dateRangeDiv.innerHTML = `<span class="start-date">${exp.start_date}</span> - <span class="end-date">${exp.end_date}</span>`;
+
+    // Create the company name div
+    const companyInfoDiv = document.createElement('div');
+    companyInfoDiv.classList.add('company-info');
+    companyInfoDiv.innerHTML = `<span class="company-name">${exp.company_name}</span>`;
+
+    // Create the position div
+    const positionInfoDiv = document.createElement('div');
+    positionInfoDiv.classList.add('position-info');
+    positionInfoDiv.innerHTML = `<span class="position">${exp.position}</span>`;
+
+    // Create the details paragraph
+    const detailsPara = document.createElement('div'); // Use a div instead of p to allow multiple types of content
+    detailsPara.classList.add('details');
+    detailsPara.innerHTML = exp.details;
+
+    // Append all created elements to the experience item div
+    div.appendChild(dateRangeDiv);
+    div.appendChild(companyInfoDiv);
+    div.appendChild(positionInfoDiv);
+    div.appendChild(detailsPara);
+
+    // Append the experience item div to the experience list
     experienceList.appendChild(div);
 });
+
 
 // Populating Education Section
 const educationList = document.querySelector('#education-list');
@@ -389,11 +415,37 @@ educationList.innerHTML = ''; // Clear the default template list item
 sortByOrderIndex(data.education.forms).forEach(edu => {
     const div = document.createElement('div');
     div.classList.add('education-item');
-    div.innerHTML = `<strong class="degree-title">${edu.degree_title}</strong>, 
-        <p><span class="institution">${edu.institution}</span> 
-        (<span class="start-date">${edu.start_date}</span> - <span class="end-date">${edu.end_date}</span>)</p>`;
+
+    // Create the date range div
+    const dateRangeDiv = document.createElement('div');
+    dateRangeDiv.classList.add('date-range');
+    dateRangeDiv.innerHTML = `<span class="start-date">${edu.start_date}</span> - <span class="end-date">${edu.end_date}</span>`;
+
+    // Create the institution div
+    const institutionDiv = document.createElement('div');
+    institutionDiv.classList.add('institution-info');
+    institutionDiv.innerHTML = `<span class="institution">${edu.institution}</span>`;
+
+    // Create the degree title div
+    const degreeDiv = document.createElement('div');
+    degreeDiv.classList.add('degree-info');
+    degreeDiv.innerHTML = `<span class="degree-title">${edu.degree_title}</span>`;
+
+    // Create the details div and insert HTML content
+    const detailsDiv = document.createElement('div');
+    detailsDiv.classList.add('details');
+    detailsDiv.innerHTML = edu.details; // Render the HTML content in details
+
+    // Append all created elements to the education item div
+    div.appendChild(dateRangeDiv);
+    div.appendChild(institutionDiv);
+    div.appendChild(degreeDiv);
+    div.appendChild(detailsDiv);
+
+    // Append the education item div to the education list
     educationList.appendChild(div);
 });
+
 
 // Populating Projects Section
 const projectsList = document.querySelector('#projects-list');
@@ -401,7 +453,7 @@ projectsList.innerHTML = ''; // Clear the default template list item
 sortByOrderIndex(data.project.forms).forEach(project => {
     const div = document.createElement('div');
     div.classList.add('project-item');
-    div.innerHTML = `<strong class="project-title">${project.title}</strong><br>
+    div.innerHTML = `<span class="project-title">${project.title}</span><br>
         <p class="project-details">${project.details}</p>`;
     projectsList.appendChild(div);
 });
@@ -412,7 +464,7 @@ publicationsList.innerHTML = ''; // Clear the default template list item
 sortByOrderIndex(data.publication.forms).forEach(publication => {
     const div = document.createElement('div');
     div.classList.add('publication-item');
-    div.innerHTML = `<strong class="publication-title">${publication.title}</strong><br>
+    div.innerHTML = `<span class="publication-title">${publication.title}</span><br>
         <p class="publication-description">${publication.description}</p>`;
     publicationsList.appendChild(div);
 });
@@ -423,8 +475,8 @@ awardsList.innerHTML = ''; // Clear the default template list item
 sortByOrderIndex(data.award.forms).forEach(award => {
     const div = document.createElement('div');
     div.classList.add('award-item');
-    div.innerHTML = `<strong class="award-name">${award.award_name}</strong> 
-        (<span class="award-date">${award.date}</span>)<br>
+    div.innerHTML = `<span class="award-date date-range">${award.date}</span><br> 
+        <span class="award-name">${award.award_name}</span><br>
         <p class="award-description">${award.description}</p>`;
     awardsList.appendChild(div);
 });
@@ -438,7 +490,7 @@ activitiesList.innerHTML = ''; // Clear the default template list item
 sortByOrderIndex(data.activitites.forms).forEach(activity => {
     const div = document.createElement('div');
     div.classList.add('activity-item');
-    div.innerHTML = `<strong class="activity-title">${activity.activity_title}</strong><br>
+    div.innerHTML = `<span class="activity-title">${activity.activity_title}</span><br>
                      <p class="activity-details">${activity.details}</p>`;
     activitiesList.appendChild(div);
 });
@@ -450,11 +502,11 @@ referencesList.innerHTML = ''; // Clear the default template list item
 sortByOrderIndex(data.reference.forms).forEach(reference => {
     const div = document.createElement('div');
     div.classList.add('reference-item');
-    div.innerHTML = `<strong class="reference-name">${reference.reference_name}</strong> 
-        (<span class="company-name">${reference.company_name}</span>, 
-        <span class="position">${reference.position}</span>)<br>
-        Email: <span class="email">${reference.email}</span><br>
-        Phone: <span class="phone">${reference.phone}</span>`;
+    div.innerHTML = `<span class="reference-name">${reference.reference_name}</span><br> 
+        <span class="company-name">${reference.company_name}</span>, 
+        <span class="position">${reference.position}</span><br>
+        <span class="phone">Phone: </span> <span class="phone">${reference.phone}</span><br>
+        <span class="email">Email: </span> <span class="email">${reference.email}</span>`;
     referencesList.appendChild(div);
 });
 
@@ -472,7 +524,7 @@ if (customSections && customSections.length > 0) {
     customSections.forEach(customSection => {
         const div = document.createElement("div");
         div.classList.add("custom-section-item");
-        div.innerHTML = `<strong class="custom-title">${customSection.title}</strong><br>${customSection.description}`;
+        div.innerHTML = `<span class="custom-title">${customSection.title}</span><br>${customSection.description}`;
         customSectionList.appendChild(div);
     });;
 };

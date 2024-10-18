@@ -9,10 +9,12 @@
     --font-family-heading: "Lato", sans-serif;
     --font-family-body: 'Poppins', sans-serif;
     --font-family-name: 'League Spartan', serif;
+    --heading-color: #3d3d3d;
     --heading-size: 15px;
     --list-size: 10px;
     --primary-color: #333;
     --secondary-color: #777;
+    --subtitle-color: #737373;
 }
 
 body {
@@ -44,7 +46,7 @@ body {
 
 .sidebar h3 {
     font-family: var(--font-family-heading);
-    margin-bottom: 10px;
+    margin-bottom: 13px;
     font-size: var(--heading-size);
 }
 
@@ -100,6 +102,12 @@ body {
     width: 520px;
 }
 
+.main-content h3{
+    font-size: var(--heading-size);
+    font-family: var(--font-family-heading);
+    margin-bottom: 13px;
+    color: var(--heading-color);
+}
 
 .right-heading{
     font-family: var(--font-family-heading);
@@ -125,12 +133,15 @@ body {
   font-style: normal;
   font-size: 42px;
   margin-top: 60px;
+  color: var(--heading-color);
 }
 
 .person-designation{
     font-family: var(--font-family-heading);
-    font-size: 16px;
+    font-size: 16px!important;
     margin-top: -15px;
+    color: var(--heading-color);
+    font-weight: 400;
 }
 
 .section-start{
@@ -139,9 +150,78 @@ body {
 }
 
 
+.date-range{
+    font-weight: 200;
+    font-weight: bolder;
+    color: var(--subtitle-color);
+}
+
+.company-info{
+    color: var(--subtitle-color);
+}
+
+.position-info{
+    color: var(--heading-color);
+    font-size: 12px;
+    margin-top: 2px;
+}
+
+
+.institution-info{
+    color: var(--subtitle-color);
+}
+
+.degree-info{
+    color: var(--heading-color);
+    font-size: 12px;
+    margin-top: 2px;
+}
+
+.project-title{
+    color: var(--heading-color);
+    font-size: 12px;
+}
+
+.publication-title{
+    color: var(--heading-color);
+    font-size: 12px;
+}
+
+.award-name{
+    color: var(--heading-color);
+    font-size: 12px;
+}
+
+.activity-title{
+    color: var(--heading-color);
+    font-size: 12px;
+}
+
+.custom-title{
+    color: var(--heading-color);
+    font-size: 12px;
+}
+
+.reference-name{
+    color: #464a4e;
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.company-name, .position{
+    color: #464a4e;
+
+}
+
+.phone, .email{
+    color: #464a4e;
+    font-size: 8px;
+}
+
+
 .separator {
     height: 1px;
-    width: 100%;
+    width: 107%;
     display: flex;
     margin: 10px 0;
     background-color: white;
@@ -158,7 +238,7 @@ body {
     width: 100%;
     display: flex;
     margin: 10px 0;
-    background-color: black;
+    background-color: #3d3d3d;
 }
 
 .align-flex{
@@ -166,8 +246,9 @@ body {
 }
 
 .about-me-section{
-    margin-top: 59px;
+    margin-top: 84.5px;
 }
+
 
 #references-list{
     display: flex;
@@ -190,33 +271,27 @@ body {
 
 .profile-container {
     position: relative;
-    width: 160.63px; 
-    height: 160.63px; 
+    width: 175.45px;
+    height: 175.45px;
     margin: 20px auto; /* Center the container */
+    border-radius: 50%;
+    background-color: rgba(151, 148, 148, 0.5);
+
 }
 
-.ring {
-    position: absolute;
-    top: -18px;
-    left: -14px;
-    width: 159.45px;
-    height: 162.45px;
-    border-radius: 50%;
-    border: 10px solid rgba(255, 255, 255, 0.5); /* White with alpha for blending */
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5); /* Optional shadow effect */
-    z-index: 1; /* Keep it behind the image */
-}
+
 
 .profile-image {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%; /* Make the image round */
-    object-fit: cover; /* Cover the container without distortion */
-    z-index: 2; /* Bring the image above the ring */
-    position: relative; /* Ensure it layers correctly */
-    left: -4px;
-    top: -6px;
+    width: 85%; /* Slightly smaller to fit within the ring */
+    height: 85%;
+    border-radius: 50%; /* Round shape */
+    object-fit: cover; /* Ensure proper fit */
+    position: absolute;
+    top: 7.5%;
+    left: 7.5%; /* Center the image inside the ring */
+    z-index: 2; /* On top of the ring */
 }
+
 
 
 @media (max-width: 768px) {
@@ -243,25 +318,23 @@ body {
         left: -20px;
     }
     .profile-image {
-        width: 70%;
-        height: 70%;
+        width: 80%;
+        height: 80%;
         border-radius: 50%;
         object-fit: cover;
         z-index: 2;
         position: relative;
-        left: 5px;
-        top: -6px;
+        left: 12px;
+        top: 11px;
     }
-    .ring {
-        position: absolute;
-        top: -16px;
-        left: -5px;
-        width: 70%;
-        height: 70%;
-        border-radius: 50%;
-        border: 10px solid rgba(255, 255, 255, 0.5);
-        box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-        z-index: 1;
+
+    .about-me-section {
+        margin-top: 33.5px;
+    }
+    
+    .profile-container{
+        width: 125.45px;
+    height: 125.45px;
     }
 
 .email-contact{
@@ -289,7 +362,7 @@ body {
     
     #interests-section p{
         font-size: var(--list-size);
-        margin-left: -10px;
+        margin-left: -2px;
     }
     .contact .material-icons {
         margin-right: 9px;
